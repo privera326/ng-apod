@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
+//1. Import ActivatedRoute
+import { ActivatedRoute } from '@angular/router';
 import { ApodService } from '../api/apod.service';
+import { Apod } from '../models/apod';
 
 @Component({
   selector: 'app-apod',
@@ -9,10 +11,33 @@ import { ApodService } from '../api/apod.service';
 })
 export class ApodComponent implements OnInit {
 
-  constructor(private apodService: ApodService) { }
+  apod:Apod;
+
+  constructor(
+    private apodService: ApodService,
+    //2. Inject ActivatedRoute into the constructor
+    private router: ActivatedRoute
+  ) { }
 
   ngOnInit() {
-    console.log(this.apodService.getApod());
+    //3. Subscribe to parameterized route
+    this.router.params.subscribe((params) => {
+      this.getApod(params['date']);
+    });
+  }
+
+  //4. Replace the current date with an updated method signature
+  getApod(date:string): void{
+
+    this.apodService.getApod(date).subscribe(
+      (response:any)=>{
+        this.apod = response;
+
+        //5. Log the results to the JS console
+        console.log(response);
+      }
+    );
+
   }
 
 }

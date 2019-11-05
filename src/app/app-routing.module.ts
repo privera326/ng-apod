@@ -5,10 +5,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { ApodComponent } from './apod/apod.component';
 
 const routes: Routes = [
-  //redirect an empty route to a given path
   { path: '', redirectTo: '/apod', pathMatch: 'full'},
-  //Define the path that will load a given component
-  { path: 'apod', component: ApodComponent }
+  { path: 'apod', component: ApodComponent },
+  { path: 'apod/:date', component: ApodComponent }
 ];
 
 @NgModule({
