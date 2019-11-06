@@ -31,7 +31,7 @@ export class ApodComponent implements OnInit {
   //4. Replace the current date with an updated method signature
   getApod(date:string): void{
 
-    //If the date is falsy, use today's date
+    //If the date is false, use today's date
     if(!date){
       date = new Date().toISOString().slice(0,10);
     }
